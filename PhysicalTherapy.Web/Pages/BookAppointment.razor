@@ -30,9 +30,9 @@
                                 <li class="mb-2"><i class="bi bi-check text-primary me-2"></i>Tour our facility</li>
                                 <li class="mb-2"><i class="bi bi-check text-primary me-2"></i>No obligation</li>
                             </ul>
-                            <button class="btn btn-primary w-100" @onclick="() => OpenCalendly(CalendlyConsultUrl)">
-                                Schedule Consultation
-                            </button>
+                            <a href="/contact" class="btn btn-primary w-100">
+                                Request Consultation
+                            </a>
                         </div>
                     </div>
                     <div class="col-md-4 mb-4">
@@ -47,9 +47,9 @@
                                 <li class="mb-2"><i class="bi bi-check text-primary me-2"></i>Goal setting with family</li>
                                 <li class="mb-2"><i class="bi bi-check text-primary me-2"></i>Home exercise program</li>
                             </ul>
-                            <button class="btn btn-primary w-100" @onclick="() => OpenCalendly(CalendlyEvalUrl)">
-                                Book Evaluation
-                            </button>
+                            <a href="@StripePaymentLinks["InitialEvaluation"]" target="_blank" class="btn btn-primary w-100">
+                                <i class="bi bi-credit-card me-2"></i>Pay & Book
+                            </a>
                         </div>
                     </div>
                     <div class="col-md-4 mb-4">
@@ -64,33 +64,49 @@
                                 <li class="mb-2"><i class="bi bi-check text-primary me-2"></i>Skill building activities</li>
                                 <li class="mb-2"><i class="bi bi-check text-primary me-2"></i>Updated home program</li>
                             </ul>
-                            <button class="btn btn-outline-primary w-100" @onclick="() => OpenCalendly(CalendlySessionUrl)">
-                                Book Session
-                            </button>
+                            <a href="@StripePaymentLinks["FollowUpSession"]" target="_blank" class="btn btn-outline-primary w-100">
+                                <i class="bi bi-credit-card me-2"></i>Pay & Book
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Calendly Embed -->
+        <!-- Additional Services -->
         <div class="row justify-content-center">
             <div class="col-lg-10">
-                <div class="card">
-                    <div class="card-body p-4">
-                        <h3 class="text-center mb-4">Select Your Appointment Time</h3>
-                        <p class="text-center text-muted mb-4">Click one of the options above or browse our calendar below.</p>
-
-                        <!-- Calendly inline widget placeholder -->
-                        <div class="calendly-inline-widget"
-                             data-url="https://calendly.com/your-practice-url"
-                             style="min-width:320px;height:700px;">
+                <h3 class="text-center mb-4">Additional Services</h3>
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="pricing-card h-100">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h4>Extended Session</h4>
+                                    <p class="text-muted mb-2">60 minutes - Complex cases & sports rehab</p>
+                                </div>
+                                <div class="pricing-amount" style="font-size: 2rem;">$175</div>
+                            </div>
+                            <hr>
+                            <a href="@StripePaymentLinks["ExtendedSession"]" target="_blank" class="btn btn-outline-primary">
+                                <i class="bi bi-credit-card me-2"></i>Pay & Book
+                            </a>
                         </div>
-
-                        <p class="text-center text-muted mt-3 small">
-                            <i class="bi bi-info-circle me-1"></i>
-                            To enable online booking, replace the Calendly URL above with your practice's Calendly link.
-                        </p>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="pricing-card h-100">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h4>Home Visit</h4>
+                                    <p class="text-muted mb-2">60 minutes - Therapy at your home</p>
+                                </div>
+                                <div class="pricing-amount" style="font-size: 2rem;">$225</div>
+                            </div>
+                            <hr>
+                            <a href="@StripePaymentLinks["HomeVisit"]" target="_blank" class="btn btn-outline-primary">
+                                <i class="bi bi-credit-card me-2"></i>Pay & Book
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -98,79 +114,68 @@
     </div>
 </section>
 
-<!-- Payment Section -->
+<!-- Payment Info Section -->
 <section class="section section-light">
     <div class="container">
         <div class="section-title">
-            <h2>Payment Options</h2>
-            <p>We offer multiple ways to pay for your sessions.</p>
+            <h2>Secure Online Payment</h2>
+            <p>Pay securely with Stripe - credit cards, debit cards, and HSA/FSA accepted.</p>
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="row">
-                    <div class="col-md-6 mb-4">
-                        <div class="card h-100">
-                            <div class="card-body text-center">
-                                <i class="bi bi-credit-card fs-1 text-primary mb-3"></i>
-                                <h4>Pay Online</h4>
-                                <p>Secure payment via credit card, debit card, or HSA/FSA.</p>
-                                <button class="btn btn-primary" @onclick="InitiateStripePayment">
-                                    Pay Now
-                                </button>
-                            </div>
-                        </div>
+                    <div class="col-md-4 mb-4 text-center">
+                        <i class="bi bi-shield-lock fs-1 text-primary mb-3"></i>
+                        <h5>Secure Payments</h5>
+                        <p class="small text-muted">256-bit SSL encryption protects your information</p>
                     </div>
-                    <div class="col-md-6 mb-4">
-                        <div class="card h-100">
-                            <div class="card-body text-center">
-                                <i class="bi bi-hospital fs-1 text-primary mb-3"></i>
-                                <h4>Insurance</h4>
-                                <p>We accept most major insurance plans. Contact us to verify coverage.</p>
-                                <a href="/contact" class="btn btn-outline-primary">
-                                    Verify Insurance
-                                </a>
-                            </div>
-                        </div>
+                    <div class="col-md-4 mb-4 text-center">
+                        <i class="bi bi-credit-card-2-front fs-1 text-primary mb-3"></i>
+                        <h5>Multiple Payment Options</h5>
+                        <p class="small text-muted">Visa, Mastercard, Amex, Discover, HSA/FSA</p>
                     </div>
+                    <div class="col-md-4 mb-4 text-center">
+                        <i class="bi bi-receipt fs-1 text-primary mb-3"></i>
+                        <h5>Instant Confirmation</h5>
+                        <p class="small text-muted">Receive email confirmation immediately</p>
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    <img src="https://stripe.com/img/v3/home/twitter.png" alt="Powered by Stripe" style="height: 30px; opacity: 0.7;" onerror="this.style.display='none'">
+                    <p class="small text-muted mt-2">Payments securely processed by Stripe</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- What to Bring Section -->
+<!-- Insurance Section -->
 <section class="section">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6 mb-4 mb-lg-0">
-                <h2>What to Bring</h2>
-                <p>To make your first visit smooth and productive, please bring:</p>
-                <ul class="list-unstyled">
-                    <li class="mb-3">
-                        <i class="bi bi-check-circle-fill text-primary me-2"></i>
-                        Insurance card (if applicable)
-                    </li>
-                    <li class="mb-3">
-                        <i class="bi bi-check-circle-fill text-primary me-2"></i>
-                        Photo ID
-                    </li>
-                    <li class="mb-3">
-                        <i class="bi bi-check-circle-fill text-primary me-2"></i>
-                        Referral from physician (if required by insurance)
-                    </li>
-                    <li class="mb-3">
-                        <i class="bi bi-check-circle-fill text-primary me-2"></i>
-                        List of current medications
-                    </li>
-                    <li class="mb-3">
-                        <i class="bi bi-check-circle-fill text-primary me-2"></i>
-                        Any relevant medical records or reports
-                    </li>
-                    <li class="mb-3">
-                        <i class="bi bi-check-circle-fill text-primary me-2"></i>
-                        Comfortable clothes for your child
-                    </li>
-                </ul>
+                <h2>Insurance Coverage</h2>
+                <p>We accept most major insurance plans. Contact us to verify your coverage before your appointment.</p>
+                <h5>Accepted Insurance:</h5>
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <ul class="list-unstyled">
+                            <li><i class="bi bi-check text-primary me-2"></i>Blue Cross Blue Shield</li>
+                            <li><i class="bi bi-check text-primary me-2"></i>Aetna</li>
+                            <li><i class="bi bi-check text-primary me-2"></i>United Healthcare</li>
+                        </ul>
+                    </div>
+                    <div class="col-6">
+                        <ul class="list-unstyled">
+                            <li><i class="bi bi-check text-primary me-2"></i>Cigna</li>
+                            <li><i class="bi bi-check text-primary me-2"></i>Medicaid</li>
+                            <li><i class="bi bi-check text-primary me-2"></i>And more...</li>
+                        </ul>
+                    </div>
+                </div>
+                <a href="/contact" class="btn btn-outline-primary">
+                    <i class="bi bi-telephone me-2"></i>Verify Insurance Coverage
+                </a>
             </div>
             <div class="col-lg-6">
                 <div class="card">
@@ -199,6 +204,54 @@
     </div>
 </section>
 
+<!-- What to Bring Section -->
+<section class="section section-cream">
+    <div class="container">
+        <div class="section-title">
+            <h2>What to Bring</h2>
+            <p>To make your first visit smooth and productive, please bring:</p>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="row">
+                    <div class="col-md-6">
+                        <ul class="list-unstyled">
+                            <li class="mb-3">
+                                <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                Insurance card (if applicable)
+                            </li>
+                            <li class="mb-3">
+                                <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                Photo ID
+                            </li>
+                            <li class="mb-3">
+                                <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                Referral from physician (if required)
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="list-unstyled">
+                            <li class="mb-3">
+                                <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                List of current medications
+                            </li>
+                            <li class="mb-3">
+                                <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                Any relevant medical records
+                            </li>
+                            <li class="mb-3">
+                                <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                                Comfortable clothes for your child
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- CTA Section -->
 <section class="cta-section">
     <div class="container">
@@ -216,31 +269,15 @@
 </section>
 
 @code {
-    // Replace these with your actual Calendly URLs
-    private string CalendlyConsultUrl = "https://calendly.com/your-practice/free-consultation";
-    private string CalendlyEvalUrl = "https://calendly.com/your-practice/initial-evaluation";
-    private string CalendlySessionUrl = "https://calendly.com/your-practice/follow-up-session";
-
-    // Replace with your Stripe publishable key
-    private string StripePublishableKey = "pk_test_your_publishable_key";
-
-    private async Task OpenCalendly(string url)
+    // Stripe Payment Links (Test Mode)
+    private Dictionary<string, string> StripePaymentLinks = new()
     {
-        await JS.InvokeVoidAsync("openCalendlyPopup", url);
-    }
+        { "InitialEvaluation", "https://buy.stripe.com/test_6oU6oHcX34k66b86yp6EU00" },
+        { "FollowUpSession", "https://buy.stripe.com/test_8x2cN5bSZdUG8jgbSJ6EU01" },
+        { "ExtendedSession", "https://buy.stripe.com/test_9B6bJ11el7wi430bSJ6EU02" },
+        { "HomeVisit", "https://buy.stripe.com/test_9B63cvcX3bMy9nk3md6EU03" }
+    };
 
-    private async Task InitiateStripePayment()
-    {
-        // In production, you would:
-        // 1. Call your backend to create a Stripe Checkout Session
-        // 2. Get the session ID back
-        // 3. Redirect to Stripe Checkout
-
-        // Example:
-        // var sessionId = await Http.GetStringAsync("/api/create-checkout-session");
-        // await JS.InvokeVoidAsync("redirectToStripeCheckout", sessionId, StripePublishableKey);
-
-        // For now, show an alert
-        await JS.InvokeVoidAsync("alert", "Stripe integration ready! Configure your Stripe keys to enable payments.");
-    }
+    // Stripe Publishable Key (Test Mode)
+    private string StripePublishableKey = "pk_test_51SdHt4DXNkziTgeUCro7kOl5GxEsuijkSlvCZ48fTyzBgIbGzYpY9C1yE5LXbFEU8TW9ArKVAhzGtaaYelLwFT3F00VwNMVcFl";
 }
