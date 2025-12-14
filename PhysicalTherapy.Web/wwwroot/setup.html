@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup Guide - En Avant Physical Therapy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4ECDC4;
+            --secondary-color: #FF6B6B;
+            --accent-color: #FFE66D;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            padding: 2rem 0;
+        }
+        .setup-header {
+            background: linear-gradient(135deg, var(--primary-color), #45b7aa);
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+            border-radius: 0 0 2rem 2rem;
+        }
+        .step-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            border-left: 4px solid var(--primary-color);
+        }
+        .step-number {
+            background: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .info-box {
+            background: #e7f9f7;
+            border: 1px solid var(--primary-color);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: 'Consolas', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+        .checklist li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        .checklist li:last-child {
+            border-bottom: none;
+        }
+        .checklist input[type="checkbox"] {
+            margin-right: 0.75rem;
+            transform: scale(1.2);
+        }
+        .account-table {
+            background: white;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        .account-table th {
+            background: var(--primary-color);
+            color: white;
+        }
+        h3 {
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+        .btn-primary {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        .btn-primary:hover {
+            background: #45b7aa;
+            border-color: #45b7aa;
+        }
+        .copy-btn {
+            cursor: pointer;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.8rem;
+        }
+        @media print {
+            .setup-header { background: #4ECDC4 !important; -webkit-print-color-adjust: exact; }
+            .no-print { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="setup-header text-center">
+        <div class="container">
+            <h1><i class="bi bi-gear-fill me-2"></i>Website Setup Guide</h1>
+            <p class="lead mb-0">En Avant Physical Therapy</p>
+        </div>
+    </div>
+
+    <div class="container" style="max-width: 900px;">
+
+        <!-- Overview -->
+        <div class="step-card">
+            <h3><i class="bi bi-info-circle text-primary me-2"></i>Overview</h3>
+            <p>This guide will help you set up your En Avant Physical Therapy website with payment processing and appointment scheduling. You'll need to create accounts with two services and provide some configuration information.</p>
+
+            <div class="info-box">
+                <strong><i class="bi bi-clock me-2"></i>Estimated Time:</strong> 30-45 minutes
+            </div>
+
+            <h5 class="mt-4">Accounts You'll Need:</h5>
+            <table class="table account-table">
+                <thead>
+                    <tr>
+                        <th>Service</th>
+                        <th>Purpose</th>
+                        <th>Cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><i class="bi bi-stripe me-2"></i>Stripe</td>
+                        <td>Payment processing</td>
+                        <td>2.9% + $0.30 per transaction</td>
+                    </tr>
+                    <tr>
+                        <td><i class="bi bi-calendar-check me-2"></i>Calendly</td>
+                        <td>Appointment scheduling</td>
+                        <td>Free tier available</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Step 1: Stripe -->
+        <div class="step-card">
+            <div class="d-flex align-items-start gap-3">
+                <div class="step-number">1</div>
+                <div class="flex-grow-1">
+                    <h3>Set Up Stripe (Payments)</h3>
+                    <p>Stripe handles all credit card payments for your services.</p>
+
+                    <h5 class="mt-4">1.1 Create a Stripe Account</h5>
+                    <ol>
+                        <li>Go to <a href="https://dashboard.stripe.com/register" target="_blank">stripe.com/register</a></li>
+                        <li>Enter your email and create a password</li>
+                        <li>Verify your email address</li>
+                        <li>Complete the business verification (you'll need):
+                            <ul>
+                                <li>Business name and address</li>
+                                <li>EIN or SSN (for tax purposes)</li>
+                                <li>Bank account for deposits</li>
+                            </ul>
+                        </li>
+                    </ol>
+
+                    <div class="warning-box">
+                        <strong><i class="bi bi-exclamation-triangle me-2"></i>Important:</strong>
+                        Complete the full verification to accept real payments. Until verified, you can only use test mode.
+                    </div>
+
+                    <h5 class="mt-4">1.2 Create Payment Links</h5>
+                    <p>You need to create a payment link for each service:</p>
+
+                    <table class="table table-bordered">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Service Name</th>
+                                <th>Price</th>
+                                <th>Your Payment Link</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Initial Evaluation (60 min)</td>
+                                <td>$200.00</td>
+                                <td><input type="text" class="form-control form-control-sm" placeholder="Paste link here" id="link-initial"></td>
+                            </tr>
+                            <tr>
+                                <td>Follow-Up Session (45 min)</td>
+                                <td>$150.00</td>
+                                <td><input type="text" class="form-control form-control-sm" placeholder="Paste link here" id="link-followup"></td>
+                            </tr>
+                            <tr>
+                                <td>Extended Session (60 min)</td>
+                                <td>$175.00</td>
+                                <td><input type="text" class="form-control form-control-sm" placeholder="Paste link here" id="link-extended"></td>
+                            </tr>
+                            <tr>
+                                <td>Home Visit (60 min)</td>
+                                <td>$225.00</td>
+                                <td><input type="text" class="form-control form-control-sm" placeholder="Paste link here" id="link-home"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h6>How to create a payment link:</h6>
+                    <ol>
+                        <li>In Stripe Dashboard, go to <strong>Payment Links</strong> (left sidebar)</li>
+                        <li>Click <strong>"+ New"</strong></li>
+                        <li>Select <strong>"Products or subscriptions"</strong></li>
+                        <li>Click <strong>"+ Add new product"</strong></li>
+                        <li>Enter the service name and price from the table above</li>
+                        <li>Set as <strong>One-time payment</strong></li>
+                        <li>Click <strong>"Create link"</strong></li>
+                        <li>Copy the link and paste it in the table above</li>
+                        <li>Repeat for each service</li>
+                    </ol>
+
+                    <div class="info-box">
+                        <strong><i class="bi bi-lightbulb me-2"></i>Tip:</strong>
+                        You can customize the checkout page with your logo and colors in Payment Link settings.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Calendly -->
+        <div class="step-card">
+            <div class="d-flex align-items-start gap-3">
+                <div class="step-number">2</div>
+                <div class="flex-grow-1">
+                    <h3>Set Up Calendly (Scheduling)</h3>
+                    <p>Calendly allows patients to book appointments directly on your website.</p>
+
+                    <h5 class="mt-4">2.1 Create a Calendly Account</h5>
+                    <ol>
+                        <li>Go to <a href="https://calendly.com/signup" target="_blank">calendly.com/signup</a></li>
+                        <li>Sign up with your email or Google account</li>
+                        <li>Complete the onboarding wizard</li>
+                    </ol>
+
+                    <h5 class="mt-4">2.2 Set Up Your Availability</h5>
+                    <ol>
+                        <li>Go to <strong>Availability</strong> in the left menu</li>
+                        <li>Set your working hours (e.g., Mon-Fri 8am-6pm, Sat 9am-2pm)</li>
+                        <li>Add any buffer time between appointments</li>
+                        <li>Set how far in advance people can book</li>
+                    </ol>
+
+                    <h5 class="mt-4">2.3 Create Event Types</h5>
+                    <p>Create event types for each appointment type:</p>
+
+                    <table class="table table-bordered">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Event Name</th>
+                                <th>Duration</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Free Consultation</td>
+                                <td>30 minutes</td>
+                            </tr>
+                            <tr>
+                                <td>Initial Evaluation</td>
+                                <td>60 minutes</td>
+                            </tr>
+                            <tr>
+                                <td>Follow-Up Session</td>
+                                <td>45 minutes</td>
+                            </tr>
+                            <tr>
+                                <td>Extended Session</td>
+                                <td>60 minutes</td>
+                            </tr>
+                            <tr>
+                                <td>Home Visit</td>
+                                <td>60 minutes</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h5 class="mt-4">2.4 Get Your Calendly Link</h5>
+                    <ol>
+                        <li>Click on your profile icon (top right)</li>
+                        <li>Your Calendly link looks like: <code>https://calendly.com/your-username</code></li>
+                        <li>Copy this link:</li>
+                    </ol>
+
+                    <div class="input-group mt-2">
+                        <span class="input-group-text">Calendly URL</span>
+                        <input type="text" class="form-control" placeholder="https://calendly.com/your-username" id="calendly-url">
+                    </div>
+
+                    <div class="info-box mt-3">
+                        <strong><i class="bi bi-lightbulb me-2"></i>Tip:</strong>
+                        Connect Calendly to your Google or Outlook calendar to automatically block off busy times.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: Business Information -->
+        <div class="step-card">
+            <div class="d-flex align-items-start gap-3">
+                <div class="step-number">3</div>
+                <div class="flex-grow-1">
+                    <h3>Your Business Information</h3>
+                    <p>Provide the following information to update on the website:</p>
+
+                    <div class="row g-3 mt-2">
+                        <div class="col-md-6">
+                            <label class="form-label"><strong>Business Name</strong></label>
+                            <input type="text" class="form-control" placeholder="En Avant Physical Therapy" id="business-name">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label"><strong>Phone Number</strong></label>
+                            <input type="tel" class="form-control" placeholder="(555) 123-4567" id="phone">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label"><strong>Email Address</strong></label>
+                            <input type="email" class="form-control" placeholder="info@enavantpt.com" id="email">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label"><strong>Website Domain</strong> (if you have one)</label>
+                            <input type="text" class="form-control" placeholder="www.enavantpt.com" id="domain">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label"><strong>Business Address</strong></label>
+                            <input type="text" class="form-control mb-2" placeholder="Street Address" id="address-street">
+                            <div class="row g-2">
+                                <div class="col-md-5">
+                                    <input type="text" class="form-control" placeholder="City" id="address-city">
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" placeholder="State" id="address-state">
+                                </div>
+                                <div class="col-md-3">
+                                    <input type="text" class="form-control" placeholder="ZIP" id="address-zip">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label"><strong>Hours of Operation</strong></label>
+                            <div class="row g-2">
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" placeholder="Mon-Fri: 8am-6pm" id="hours-weekday">
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" placeholder="Sat: 9am-2pm" id="hours-saturday">
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" placeholder="Sun: Closed" id="hours-sunday">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5 class="mt-4">Social Media (Optional)</h5>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-facebook"></i></span>
+                                <input type="text" class="form-control" placeholder="Facebook page URL" id="social-facebook">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-instagram"></i></span>
+                                <input type="text" class="form-control" placeholder="Instagram profile URL" id="social-instagram">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4: Team Information -->
+        <div class="step-card">
+            <div class="d-flex align-items-start gap-3">
+                <div class="step-number">4</div>
+                <div class="flex-grow-1">
+                    <h3>Team Member Information</h3>
+                    <p>Provide details for each team member to display on the website:</p>
+
+                    <div class="border rounded p-3 mb-3 bg-light">
+                        <h6>Team Member 1</h6>
+                        <div class="row g-2">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control form-control-sm" placeholder="Full Name" id="team1-name">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control form-control-sm" placeholder="Title (e.g., PT, DPT, Owner)" id="team1-title">
+                            </div>
+                            <div class="col-12">
+                                <input type="text" class="form-control form-control-sm" placeholder="Credentials (e.g., DPT, PCS)" id="team1-credentials">
+                            </div>
+                            <div class="col-12">
+                                <textarea class="form-control form-control-sm" rows="2" placeholder="Short bio (2-3 sentences)" id="team1-bio"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border rounded p-3 mb-3 bg-light">
+                        <h6>Team Member 2</h6>
+                        <div class="row g-2">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control form-control-sm" placeholder="Full Name" id="team2-name">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control form-control-sm" placeholder="Title" id="team2-title">
+                            </div>
+                            <div class="col-12">
+                                <input type="text" class="form-control form-control-sm" placeholder="Credentials" id="team2-credentials">
+                            </div>
+                            <div class="col-12">
+                                <textarea class="form-control form-control-sm" rows="2" placeholder="Short bio" id="team2-bio"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border rounded p-3 bg-light">
+                        <h6>Team Member 3</h6>
+                        <div class="row g-2">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control form-control-sm" placeholder="Full Name" id="team3-name">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control form-control-sm" placeholder="Title" id="team3-title">
+                            </div>
+                            <div class="col-12">
+                                <input type="text" class="form-control form-control-sm" placeholder="Credentials" id="team3-credentials">
+                            </div>
+                            <div class="col-12">
+                                <textarea class="form-control form-control-sm" rows="2" placeholder="Short bio" id="team3-bio"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-box mt-3">
+                        <strong><i class="bi bi-camera me-2"></i>Team Photos:</strong>
+                        Please also provide professional headshot photos for each team member (recommended size: 400x400 pixels).
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Checklist -->
+        <div class="step-card">
+            <h3><i class="bi bi-check2-square text-primary me-2"></i>Setup Checklist</h3>
+            <p>Use this checklist to track your progress:</p>
+
+            <ul class="checklist">
+                <li><input type="checkbox" id="check-1"><label for="check-1">Created Stripe account</label></li>
+                <li><input type="checkbox" id="check-2"><label for="check-2">Completed Stripe business verification</label></li>
+                <li><input type="checkbox" id="check-3"><label for="check-3">Created all 4 Stripe payment links</label></li>
+                <li><input type="checkbox" id="check-4"><label for="check-4">Created Calendly account</label></li>
+                <li><input type="checkbox" id="check-5"><label for="check-5">Set up Calendly availability</label></li>
+                <li><input type="checkbox" id="check-6"><label for="check-6">Created Calendly event types</label></li>
+                <li><input type="checkbox" id="check-7"><label for="check-7">Copied Calendly URL</label></li>
+                <li><input type="checkbox" id="check-8"><label for="check-8">Filled in business information</label></li>
+                <li><input type="checkbox" id="check-9"><label for="check-9">Filled in team member information</label></li>
+                <li><input type="checkbox" id="check-10"><label for="check-10">Gathered team member photos</label></li>
+            </ul>
+        </div>
+
+        <!-- Submit Section -->
+        <div class="step-card text-center">
+            <h3><i class="bi bi-send text-primary me-2"></i>Send Your Information</h3>
+            <p>Once you've completed all the steps above, you can:</p>
+
+            <div class="row justify-content-center mt-4">
+                <div class="col-md-6">
+                    <button class="btn btn-primary btn-lg w-100 mb-3 no-print" onclick="generateSummary()">
+                        <i class="bi bi-clipboard-check me-2"></i>Generate Summary
+                    </button>
+                    <button class="btn btn-outline-secondary w-100 no-print" onclick="window.print()">
+                        <i class="bi bi-printer me-2"></i>Print This Page
+                    </button>
+                </div>
+            </div>
+
+            <div id="summary-output" class="mt-4 text-start" style="display: none;">
+                <h5>Your Configuration Summary:</h5>
+                <div class="code-block" id="summary-text"></div>
+                <button class="btn btn-sm btn-primary mt-2 no-print" onclick="copySummary()">
+                    <i class="bi bi-clipboard me-2"></i>Copy to Clipboard
+                </button>
+            </div>
+        </div>
+
+        <!-- Support -->
+        <div class="step-card">
+            <h3><i class="bi bi-question-circle text-primary me-2"></i>Need Help?</h3>
+            <p>If you run into any issues during setup:</p>
+            <ul>
+                <li><strong>Stripe Help:</strong> <a href="https://support.stripe.com" target="_blank">support.stripe.com</a></li>
+                <li><strong>Calendly Help:</strong> <a href="https://help.calendly.com" target="_blank">help.calendly.com</a></li>
+            </ul>
+        </div>
+
+        <div class="text-center text-muted py-4">
+            <small>This setup guide is for En Avant Physical Therapy website configuration.</small>
+        </div>
+    </div>
+
+    <script>
+        function generateSummary() {
+            const data = {
+                stripe: {
+                    initialEvaluation: document.getElementById('link-initial').value,
+                    followUp: document.getElementById('link-followup').value,
+                    extended: document.getElementById('link-extended').value,
+                    homeVisit: document.getElementById('link-home').value
+                },
+                calendly: document.getElementById('calendly-url').value,
+                business: {
+                    name: document.getElementById('business-name').value,
+                    phone: document.getElementById('phone').value,
+                    email: document.getElementById('email').value,
+                    domain: document.getElementById('domain').value,
+                    address: {
+                        street: document.getElementById('address-street').value,
+                        city: document.getElementById('address-city').value,
+                        state: document.getElementById('address-state').value,
+                        zip: document.getElementById('address-zip').value
+                    },
+                    hours: {
+                        weekday: document.getElementById('hours-weekday').value,
+                        saturday: document.getElementById('hours-saturday').value,
+                        sunday: document.getElementById('hours-sunday').value
+                    }
+                },
+                social: {
+                    facebook: document.getElementById('social-facebook').value,
+                    instagram: document.getElementById('social-instagram').value
+                },
+                team: [
+                    {
+                        name: document.getElementById('team1-name').value,
+                        title: document.getElementById('team1-title').value,
+                        credentials: document.getElementById('team1-credentials').value,
+                        bio: document.getElementById('team1-bio').value
+                    },
+                    {
+                        name: document.getElementById('team2-name').value,
+                        title: document.getElementById('team2-title').value,
+                        credentials: document.getElementById('team2-credentials').value,
+                        bio: document.getElementById('team2-bio').value
+                    },
+                    {
+                        name: document.getElementById('team3-name').value,
+                        title: document.getElementById('team3-title').value,
+                        credentials: document.getElementById('team3-credentials').value,
+                        bio: document.getElementById('team3-bio').value
+                    }
+                ].filter(t => t.name)
+            };
+
+            const summary = JSON.stringify(data, null, 2);
+            document.getElementById('summary-text').textContent = summary;
+            document.getElementById('summary-output').style.display = 'block';
+        }
+
+        function copySummary() {
+            const text = document.getElementById('summary-text').textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Summary copied to clipboard!');
+            });
+        }
+
+        // Save form data to localStorage
+        document.querySelectorAll('input, textarea').forEach(el => {
+            const saved = localStorage.getItem('setup_' + el.id);
+            if (saved) el.value = saved;
+
+            el.addEventListener('change', () => {
+                localStorage.setItem('setup_' + el.id, el.value);
+            });
+        });
+
+        // Save checkboxes
+        document.querySelectorAll('input[type="checkbox"]').forEach(el => {
+            const saved = localStorage.getItem('setup_' + el.id);
+            if (saved === 'true') el.checked = true;
+
+            el.addEventListener('change', () => {
+                localStorage.setItem('setup_' + el.id, el.checked);
+            });
+        });
+    </script>
+</body>
+</html>
