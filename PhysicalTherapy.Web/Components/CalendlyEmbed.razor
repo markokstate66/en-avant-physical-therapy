@@ -1,0 +1,33 @@
+@inject IJSRuntime JS
+
+<div class="calendly-container">
+    @if (UsePopup)
+    {
+        <button class="btn btn-primary btn-lg" @onclick="OpenCalendlyPopup">
+            <i class="bi bi-calendar-check me-2"></i>@ButtonText
+        </button>
+    }
+    else
+    {
+        <div class="calendly-inline-widget"
+             data-url="@CalendlyUrl"
+             style="min-width:320px;height:700px;">
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter]
+    public string CalendlyUrl { get; set; } = "https://calendly.com/your-calendly-url";
+
+    [Parameter]
+    public bool UsePopup { get; set; } = false;
+
+    [Parameter]
+    public string ButtonText { get; set; } = "Schedule Appointment";
+
+    private async Task OpenCalendlyPopup()
+    {
+        await JS.InvokeVoidAsync("openCalendlyPopup", CalendlyUrl);
+    }
+}

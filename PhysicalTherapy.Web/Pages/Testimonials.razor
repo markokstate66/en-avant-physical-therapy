@@ -1,0 +1,147 @@
+@page "/testimonials"
+@inject PhysicalTherapy.Web.Services.ContentService ContentService
+
+<PageTitle>Testimonials - En Avant Physical Therapy</PageTitle>
+
+<!-- Page Header -->
+<section class="page-header">
+    <div class="container">
+        <h1>Parent Testimonials</h1>
+        <p>Hear from families who have experienced the transformative care at En Avant.</p>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="section">
+    <div class="container">
+        <div class="row">
+            @foreach (var testimonial in testimonials)
+            {
+                <TestimonialCard Testimonial="@testimonial" />
+            }
+        </div>
+    </div>
+</section>
+
+<!-- Success Stats Section -->
+<section class="section section-light">
+    <div class="container">
+        <div class="section-title">
+            <h2>Our Impact</h2>
+            <p>Numbers that reflect the trust families place in us.</p>
+        </div>
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Families Served</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">98%</div>
+                <div class="stat-label">Recommend Us</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">4.9</div>
+                <div class="stat-label">Average Rating</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">95%</div>
+                <div class="stat-label">Goal Achievement</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Success Stories Section -->
+<section class="section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Success Stories</h2>
+            <p>Real progress from real families.</p>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="bi bi-emoji-smile"></i>
+                        </div>
+                        <h4>Emma's Story</h4>
+                        <p class="text-muted small">Age 3 - Developmental Delays</p>
+                        <p>"Emma came to us at 2.5 years old, not yet walking independently. After 6 months of weekly sessions, she was running and playing with her peers. Her parents call it a miracle, but we call it dedication and expert care working together."</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="card-icon" style="background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));">
+                            <i class="bi bi-trophy"></i>
+                        </div>
+                        <h4>Jake's Story</h4>
+                        <p class="text-muted small">Age 11 - Sports Injury</p>
+                        <p>"After a soccer injury that required surgery, Jake worried he'd never play again. Our sports rehab program got him back on the field in record time, stronger and more confident than ever."</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="card-icon" style="background: linear-gradient(135deg, var(--accent), var(--accent-dark));">
+                            <i class="bi bi-stars"></i>
+                        </div>
+                        <h4>Mia's Story</h4>
+                        <p class="text-muted small">Age 5 - Sensory Processing</p>
+                        <p>"Mia's sensory challenges made everyday activities overwhelming. Through consistent therapy and home strategies, she now navigates her world with confidence. School has become a joy instead of a struggle."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Leave Review Section -->
+<section class="section section-cream">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <h2>Share Your Experience</h2>
+                <p>Have you been an En Avant family? We'd love to hear about your experience! Your review helps other families find the care they need.</p>
+                <p>You can leave a review on:</p>
+                <div class="d-flex flex-wrap gap-3">
+                    <a href="#" class="btn btn-outline-primary">
+                        <i class="bi bi-google me-2"></i>Google
+                    </a>
+                    <a href="#" class="btn btn-outline-primary">
+                        <i class="bi bi-facebook me-2"></i>Facebook
+                    </a>
+                    <a href="#" class="btn btn-outline-primary">
+                        <i class="bi bi-yelp me-2"></i>Yelp
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="hero-image-placeholder" style="height: 250px; background: linear-gradient(135deg, var(--primary), var(--accent));">
+                    <i class="bi bi-chat-heart"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container">
+        <h2>Ready to Start Your Success Story?</h2>
+        <p>Join the hundreds of families who have trusted En Avant with their children's care.</p>
+        <a href="/book" class="btn btn-secondary btn-lg">Book Your Free Consultation</a>
+    </div>
+</section>
+
+@code {
+    private List<Testimonial> testimonials = new();
+
+    protected override void OnInitialized()
+    {
+        testimonials = ContentService.GetTestimonials();
+    }
+}

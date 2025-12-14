@@ -1,0 +1,177 @@
+@page "/"
+@inject PhysicalTherapy.Web.Services.ContentService ContentService
+
+<PageTitle>En Avant Physical Therapy - Helping Children Move Forward</PageTitle>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 hero-content">
+                <h1>Helping Children Move <span>Forward</span> to Big Achievements</h1>
+                <p>Expert pediatric physical therapy in a warm, playful environment where every child feels safe to grow, learn, and thrive.</p>
+                <div class="d-flex gap-3 flex-wrap">
+                    <a href="/book" class="btn btn-primary btn-lg">Book a Free Consultation</a>
+                    <a href="/services" class="btn btn-outline-primary btn-lg">Our Services</a>
+                </div>
+                <div class="trust-badges">
+                    <div class="trust-badge">
+                        <i class="bi bi-shield-check"></i>
+                        <span>Licensed & Certified</span>
+                    </div>
+                    <div class="trust-badge">
+                        <i class="bi bi-heart"></i>
+                        <span>Child-Friendly</span>
+                    </div>
+                    <div class="trust-badge">
+                        <i class="bi bi-award"></i>
+                        <span>15+ Years Experience</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 hero-image">
+                <div class="hero-image-placeholder">
+                    <i class="bi bi-heart-pulse"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="section">
+    <div class="container">
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Happy Families</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">15+</div>
+                <div class="stat-label">Years Experience</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">4</div>
+                <div class="stat-label">Expert Therapists</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">98%</div>
+                <div class="stat-label">Parent Satisfaction</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Preview Section -->
+<section class="section section-light">
+    <div class="container">
+        <div class="section-title">
+            <h2>Our Services</h2>
+            <p>Comprehensive pediatric physical therapy services designed to help your child reach their developmental milestones.</p>
+        </div>
+        <div class="row">
+            @foreach (var service in services.Take(3))
+            {
+                <ServiceCard Service="@service" ShowButton="true" />
+            }
+        </div>
+        <div class="text-center mt-4">
+            <a href="/services" class="btn btn-primary">View All Services</a>
+        </div>
+    </div>
+</section>
+
+<!-- Why Choose Us Section -->
+<section class="section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <div class="hero-image-placeholder" style="height: 350px;">
+                    <i class="bi bi-people"></i>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h2>Why Families Choose En Avant</h2>
+                <p class="mb-4">We understand that choosing a therapist for your child is a big decision. That's why we've created a space where children feel comfortable and parents feel confident.</p>
+                <div class="row">
+                    <div class="col-sm-6 mb-3">
+                        <div class="d-flex align-items-start">
+                            <i class="bi bi-check-circle-fill text-primary me-3 fs-4"></i>
+                            <div>
+                                <h5 class="mb-1">Play-Based Therapy</h5>
+                                <p class="small mb-0">Learning through fun activities</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 mb-3">
+                        <div class="d-flex align-items-start">
+                            <i class="bi bi-check-circle-fill text-primary me-3 fs-4"></i>
+                            <div>
+                                <h5 class="mb-1">Family-Centered Care</h5>
+                                <p class="small mb-0">Parents as partners in progress</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 mb-3">
+                        <div class="d-flex align-items-start">
+                            <i class="bi bi-check-circle-fill text-primary me-3 fs-4"></i>
+                            <div>
+                                <h5 class="mb-1">Flexible Scheduling</h5>
+                                <p class="small mb-0">Appointments that work for you</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 mb-3">
+                        <div class="d-flex align-items-start">
+                            <i class="bi bi-check-circle-fill text-primary me-3 fs-4"></i>
+                            <div>
+                                <h5 class="mb-1">Personalized Plans</h5>
+                                <p class="small mb-0">Tailored to each child's needs</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="/about" class="btn btn-primary mt-3">Learn More About Us</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="section section-cream">
+    <div class="container">
+        <div class="section-title">
+            <h2>What Parents Say</h2>
+            <p>Hear from families who have experienced the En Avant difference.</p>
+        </div>
+        <div class="row">
+            @foreach (var testimonial in testimonials.Take(3))
+            {
+                <TestimonialCard Testimonial="@testimonial" />
+            }
+        </div>
+        <div class="text-center mt-4">
+            <a href="/testimonials" class="btn btn-outline-primary">Read More Reviews</a>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container">
+        <h2>Ready to Help Your Child Thrive?</h2>
+        <p>Schedule a free consultation to discuss your child's needs and learn how we can help.</p>
+        <a href="/book" class="btn btn-secondary btn-lg">Book Your Free Consultation</a>
+    </div>
+</section>
+
+@code {
+    private List<Service> services = new();
+    private List<Testimonial> testimonials = new();
+
+    protected override void OnInitialized()
+    {
+        services = ContentService.GetServices();
+        testimonials = ContentService.GetTestimonials();
+    }
+}

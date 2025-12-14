@@ -1,0 +1,21 @@
+@using PhysicalTherapy.Web.Models
+
+<div class="col-md-6 col-lg-3 mb-4">
+    <div class="card team-card h-100">
+        <div class="card-body">
+            <div class="team-photo">
+                <i class="bi @TeamMember.Icon"></i>
+            </div>
+            <h4 class="team-name">@TeamMember.Name</h4>
+            <p class="team-role">@TeamMember.Role</p>
+            <p class="small text-muted mb-2">@TeamMember.Credentials</p>
+            <p>@TeamMember.Bio</p>
+            <p class="small"><strong>Specializations:</strong> @TeamMember.Specializations</p>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public TeamMember TeamMember { get; set; } = new();
+}

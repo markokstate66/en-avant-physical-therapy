@@ -1,0 +1,161 @@
+@page "/blog"
+@inject PhysicalTherapy.Web.Services.ContentService ContentService
+
+<PageTitle>Blog & Resources - En Avant Physical Therapy</PageTitle>
+
+<!-- Page Header -->
+<section class="page-header">
+    <div class="container">
+        <h1>Blog & Resources</h1>
+        <p>Expert articles, tips, and resources to help support your child's development at home.</p>
+    </div>
+</section>
+
+<!-- Blog Posts Section -->
+<section class="section">
+    <div class="container">
+        <div class="row">
+            @foreach (var post in blogPosts)
+            {
+                <BlogPostCard BlogPost="@post" />
+            }
+        </div>
+    </div>
+</section>
+
+<!-- Resource Downloads Section -->
+<section class="section section-light">
+    <div class="container">
+        <div class="section-title">
+            <h2>Free Resources</h2>
+            <p>Download helpful guides and activity sheets to support your child's progress at home.</p>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <div class="card-icon mx-auto">
+                            <i class="bi bi-file-earmark-pdf"></i>
+                        </div>
+                        <h4>Milestone Checklist</h4>
+                        <p>A comprehensive guide to physical developmental milestones from birth to age 5.</p>
+                        <button class="btn btn-outline-primary">
+                            <i class="bi bi-download me-2"></i>Download PDF
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <div class="card-icon mx-auto" style="background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));">
+                            <i class="bi bi-file-earmark-text"></i>
+                        </div>
+                        <h4>Home Exercise Guide</h4>
+                        <p>Fun activities you can do at home to support balance, strength, and coordination.</p>
+                        <button class="btn btn-outline-primary">
+                            <i class="bi bi-download me-2"></i>Download PDF
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <div class="card-icon mx-auto" style="background: linear-gradient(135deg, var(--accent), var(--accent-dark));">
+                            <i class="bi bi-file-earmark-check"></i>
+                        </div>
+                        <h4>First Visit Prep Sheet</h4>
+                        <p>Everything you need to know to prepare for your child's first therapy appointment.</p>
+                        <button class="btn btn-outline-primary">
+                            <i class="bi bi-download me-2"></i>Download PDF
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Newsletter Section -->
+<section class="section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h2>Stay Updated</h2>
+                <p class="mb-4">Subscribe to our newsletter for the latest tips, articles, and resources delivered to your inbox monthly.</p>
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="input-group">
+                            <input type="email" class="form-control form-control-lg" placeholder="Enter your email address" @bind="newsletterEmail">
+                            <button class="btn btn-primary" type="button" @onclick="SubscribeNewsletter">
+                                Subscribe
+                            </button>
+                        </div>
+                        @if (showSubscribeSuccess)
+                        {
+                            <div class="alert alert-success mt-3" role="alert">
+                                <i class="bi bi-check-circle me-2"></i>Thanks for subscribing! Check your inbox for a welcome email.
+                            </div>
+                        }
+                        <p class="small text-muted mt-2">We respect your privacy. Unsubscribe at any time.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Topics Section -->
+<section class="section section-cream">
+    <div class="container">
+        <div class="section-title">
+            <h2>Browse by Topic</h2>
+            <p>Find articles and resources organized by category.</p>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <div class="d-flex flex-wrap gap-2 justify-content-center">
+                    <span class="badge rounded-pill p-3" style="background: var(--primary); font-size: 1rem;">Home Exercises</span>
+                    <span class="badge rounded-pill p-3" style="background: var(--secondary); font-size: 1rem;">Education</span>
+                    <span class="badge rounded-pill p-3" style="background: var(--accent); color: var(--text-dark); font-size: 1rem;">Therapy Tips</span>
+                    <span class="badge rounded-pill p-3" style="background: var(--primary); font-size: 1rem;">Getting Started</span>
+                    <span class="badge rounded-pill p-3" style="background: var(--secondary); font-size: 1rem;">Prevention</span>
+                    <span class="badge rounded-pill p-3" style="background: var(--accent); color: var(--text-dark); font-size: 1rem;">Milestones</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container">
+        <h2>Have a Question?</h2>
+        <p>Our team is happy to answer your questions about pediatric physical therapy.</p>
+        <a href="/contact" class="btn btn-secondary btn-lg">Contact Us</a>
+    </div>
+</section>
+
+@code {
+    private List<BlogPost> blogPosts = new();
+    private string newsletterEmail = "";
+    private bool showSubscribeSuccess = false;
+
+    protected override void OnInitialized()
+    {
+        blogPosts = ContentService.GetBlogPosts();
+    }
+
+    private async Task SubscribeNewsletter()
+    {
+        if (!string.IsNullOrWhiteSpace(newsletterEmail))
+        {
+            // In production, send to your email service
+            await Task.Delay(500);
+            showSubscribeSuccess = true;
+            newsletterEmail = "";
+            StateHasChanged();
+        }
+    }
+}

@@ -1,0 +1,246 @@
+@page "/book"
+@inject IJSRuntime JS
+@inject PhysicalTherapy.Web.Services.ContentService ContentService
+
+<PageTitle>Book an Appointment - En Avant Physical Therapy</PageTitle>
+
+<!-- Page Header -->
+<section class="page-header">
+    <div class="container">
+        <h1>Book an Appointment</h1>
+        <p>Schedule your free consultation or book a therapy session online.</p>
+    </div>
+</section>
+
+<!-- Booking Options Section -->
+<section class="section booking-section">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-10">
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <div class="pricing-card h-100">
+                            <h4>Free Consultation</h4>
+                            <div class="pricing-amount">Free</div>
+                            <p class="pricing-period">30 minutes</p>
+                            <hr>
+                            <ul class="list-unstyled text-start mb-4">
+                                <li class="mb-2"><i class="bi bi-check text-primary me-2"></i>Meet our team</li>
+                                <li class="mb-2"><i class="bi bi-check text-primary me-2"></i>Discuss your concerns</li>
+                                <li class="mb-2"><i class="bi bi-check text-primary me-2"></i>Tour our facility</li>
+                                <li class="mb-2"><i class="bi bi-check text-primary me-2"></i>No obligation</li>
+                            </ul>
+                            <button class="btn btn-primary w-100" @onclick="() => OpenCalendly(CalendlyConsultUrl)">
+                                Schedule Consultation
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="pricing-card featured h-100">
+                            <h4>Initial Evaluation</h4>
+                            <div class="pricing-amount">$200</div>
+                            <p class="pricing-period">60 minutes</p>
+                            <hr>
+                            <ul class="list-unstyled text-start mb-4">
+                                <li class="mb-2"><i class="bi bi-check text-primary me-2"></i>Comprehensive assessment</li>
+                                <li class="mb-2"><i class="bi bi-check text-primary me-2"></i>Personalized treatment plan</li>
+                                <li class="mb-2"><i class="bi bi-check text-primary me-2"></i>Goal setting with family</li>
+                                <li class="mb-2"><i class="bi bi-check text-primary me-2"></i>Home exercise program</li>
+                            </ul>
+                            <button class="btn btn-primary w-100" @onclick="() => OpenCalendly(CalendlyEvalUrl)">
+                                Book Evaluation
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <div class="pricing-card h-100">
+                            <h4>Follow-Up Session</h4>
+                            <div class="pricing-amount">$150</div>
+                            <p class="pricing-period">45 minutes</p>
+                            <hr>
+                            <ul class="list-unstyled text-start mb-4">
+                                <li class="mb-2"><i class="bi bi-check text-primary me-2"></i>Ongoing therapy</li>
+                                <li class="mb-2"><i class="bi bi-check text-primary me-2"></i>Progress monitoring</li>
+                                <li class="mb-2"><i class="bi bi-check text-primary me-2"></i>Skill building activities</li>
+                                <li class="mb-2"><i class="bi bi-check text-primary me-2"></i>Updated home program</li>
+                            </ul>
+                            <button class="btn btn-outline-primary w-100" @onclick="() => OpenCalendly(CalendlySessionUrl)">
+                                Book Session
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calendly Embed -->
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card">
+                    <div class="card-body p-4">
+                        <h3 class="text-center mb-4">Select Your Appointment Time</h3>
+                        <p class="text-center text-muted mb-4">Click one of the options above or browse our calendar below.</p>
+
+                        <!-- Calendly inline widget placeholder -->
+                        <div class="calendly-inline-widget"
+                             data-url="https://calendly.com/your-practice-url"
+                             style="min-width:320px;height:700px;">
+                        </div>
+
+                        <p class="text-center text-muted mt-3 small">
+                            <i class="bi bi-info-circle me-1"></i>
+                            To enable online booking, replace the Calendly URL above with your practice's Calendly link.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Payment Section -->
+<section class="section section-light">
+    <div class="container">
+        <div class="section-title">
+            <h2>Payment Options</h2>
+            <p>We offer multiple ways to pay for your sessions.</p>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="bi bi-credit-card fs-1 text-primary mb-3"></i>
+                                <h4>Pay Online</h4>
+                                <p>Secure payment via credit card, debit card, or HSA/FSA.</p>
+                                <button class="btn btn-primary" @onclick="InitiateStripePayment">
+                                    Pay Now
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body text-center">
+                                <i class="bi bi-hospital fs-1 text-primary mb-3"></i>
+                                <h4>Insurance</h4>
+                                <p>We accept most major insurance plans. Contact us to verify coverage.</p>
+                                <a href="/contact" class="btn btn-outline-primary">
+                                    Verify Insurance
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- What to Bring Section -->
+<section class="section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <h2>What to Bring</h2>
+                <p>To make your first visit smooth and productive, please bring:</p>
+                <ul class="list-unstyled">
+                    <li class="mb-3">
+                        <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                        Insurance card (if applicable)
+                    </li>
+                    <li class="mb-3">
+                        <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                        Photo ID
+                    </li>
+                    <li class="mb-3">
+                        <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                        Referral from physician (if required by insurance)
+                    </li>
+                    <li class="mb-3">
+                        <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                        List of current medications
+                    </li>
+                    <li class="mb-3">
+                        <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                        Any relevant medical records or reports
+                    </li>
+                    <li class="mb-3">
+                        <i class="bi bi-check-circle-fill text-primary me-2"></i>
+                        Comfortable clothes for your child
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body p-4">
+                        <h4 class="mb-3"><i class="bi bi-clock me-2 text-primary"></i>Hours of Operation</h4>
+                        <table class="table table-borderless mb-0">
+                            <tbody>
+                                <tr>
+                                    <td>Monday - Friday</td>
+                                    <td class="text-end">8:00 AM - 6:00 PM</td>
+                                </tr>
+                                <tr>
+                                    <td>Saturday</td>
+                                    <td class="text-end">9:00 AM - 2:00 PM</td>
+                                </tr>
+                                <tr>
+                                    <td>Sunday</td>
+                                    <td class="text-end">Closed</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container">
+        <h2>Questions About Booking?</h2>
+        <p>Our team is here to help you schedule the right appointment for your child.</p>
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <a href="tel:5551234567" class="btn btn-secondary btn-lg">
+                <i class="bi bi-telephone me-2"></i>Call (555) 123-4567
+            </a>
+            <a href="/contact" class="btn btn-outline-light btn-lg">
+                Contact Us Online
+            </a>
+        </div>
+    </div>
+</section>
+
+@code {
+    // Replace these with your actual Calendly URLs
+    private string CalendlyConsultUrl = "https://calendly.com/your-practice/free-consultation";
+    private string CalendlyEvalUrl = "https://calendly.com/your-practice/initial-evaluation";
+    private string CalendlySessionUrl = "https://calendly.com/your-practice/follow-up-session";
+
+    // Replace with your Stripe publishable key
+    private string StripePublishableKey = "pk_test_your_publishable_key";
+
+    private async Task OpenCalendly(string url)
+    {
+        await JS.InvokeVoidAsync("openCalendlyPopup", url);
+    }
+
+    private async Task InitiateStripePayment()
+    {
+        // In production, you would:
+        // 1. Call your backend to create a Stripe Checkout Session
+        // 2. Get the session ID back
+        // 3. Redirect to Stripe Checkout
+
+        // Example:
+        // var sessionId = await Http.GetStringAsync("/api/create-checkout-session");
+        // await JS.InvokeVoidAsync("redirectToStripeCheckout", sessionId, StripePublishableKey);
+
+        // For now, show an alert
+        await JS.InvokeVoidAsync("alert", "Stripe integration ready! Configure your Stripe keys to enable payments.");
+    }
+}

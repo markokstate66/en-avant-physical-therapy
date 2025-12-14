@@ -1,0 +1,54 @@
+@inherits LayoutComponentBase
+
+<div class="page">
+    <NavMenu />
+
+    <main>
+        @Body
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <h5>En <span style="color: var(--secondary);">Avant</span></h5>
+                    <p>Helping children move forward through expert, compassionate pediatric physical therapy.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h5>Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/services">Services</a></li>
+                        <li><a href="/team">Our Team</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <h5>Resources</h5>
+                    <ul class="footer-links">
+                        <li><a href="/testimonials">Testimonials</a></li>
+                        <li><a href="/blog">Blog</a></li>
+                        <li><a href="/book">Book Online</a></li>
+                        <li><a href="/contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h5>Contact Us</h5>
+                    <p><i class="bi bi-geo-alt me-2"></i>123 Wellness Way, Suite 100</p>
+                    <p><i class="bi bi-telephone me-2"></i>(555) 123-4567</p>
+                    <p><i class="bi bi-envelope me-2"></i>hello@enavantpt.com</p>
+                    <p><i class="bi bi-clock me-2"></i>Mon-Fri: 8am - 6pm</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; @DateTime.Now.Year En Avant Physical Therapy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</div>

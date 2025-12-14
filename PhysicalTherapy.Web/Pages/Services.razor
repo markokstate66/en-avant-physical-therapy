@@ -1,0 +1,162 @@
+@page "/services"
+@inject PhysicalTherapy.Web.Services.ContentService ContentService
+
+<PageTitle>Our Services - En Avant Physical Therapy</PageTitle>
+
+<!-- Page Header -->
+<section class="page-header">
+    <div class="container">
+        <h1>Our Services</h1>
+        <p>Comprehensive pediatric physical therapy services tailored to help your child reach their full potential.</p>
+    </div>
+</section>
+
+<!-- Services List Section -->
+<section class="section">
+    <div class="container">
+        <div class="row">
+            @foreach (var service in services)
+            {
+                <ServiceCard Service="@service" ShowPrice="true" ShowButton="true" />
+            }
+        </div>
+    </div>
+</section>
+
+<!-- What to Expect Section -->
+<section class="section section-light">
+    <div class="container">
+        <div class="section-title">
+            <h2>What to Expect</h2>
+            <p>Here's how we work with you and your child from first visit to ongoing care.</p>
+        </div>
+        <div class="row">
+            <div class="col-md-3 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <div class="card-icon mx-auto">
+                            <span style="font-weight: bold;">1</span>
+                        </div>
+                        <h4>Free Consultation</h4>
+                        <p>Meet with one of our therapists to discuss your concerns and learn how we can help.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <div class="card-icon mx-auto" style="background: linear-gradient(135deg, var(--secondary), var(--secondary-dark));">
+                            <span style="font-weight: bold;">2</span>
+                        </div>
+                        <h4>Comprehensive Evaluation</h4>
+                        <p>We assess your child's strengths and areas for growth through play-based testing.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <div class="card-icon mx-auto" style="background: linear-gradient(135deg, var(--accent), var(--accent-dark));">
+                            <span style="font-weight: bold;">3</span>
+                        </div>
+                        <h4>Personalized Plan</h4>
+                        <p>We create a customized treatment plan with clear goals tailored to your child.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="card h-100">
+                    <div class="card-body text-center">
+                        <div class="card-icon mx-auto">
+                            <span style="font-weight: bold;">4</span>
+                        </div>
+                        <h4>Ongoing Therapy</h4>
+                        <p>Regular sessions with progress updates and home exercise programs for families.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Insurance & Payment Section -->
+<section class="section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <h2>Insurance & Payment</h2>
+                <p>We work with most major insurance providers and offer flexible payment options to make therapy accessible for your family.</p>
+                <h5>Accepted Insurance:</h5>
+                <div class="row mb-3">
+                    <div class="col-6">
+                        <ul class="list-unstyled">
+                            <li><i class="bi bi-check text-primary me-2"></i>Blue Cross Blue Shield</li>
+                            <li><i class="bi bi-check text-primary me-2"></i>Aetna</li>
+                            <li><i class="bi bi-check text-primary me-2"></i>United Healthcare</li>
+                        </ul>
+                    </div>
+                    <div class="col-6">
+                        <ul class="list-unstyled">
+                            <li><i class="bi bi-check text-primary me-2"></i>Cigna</li>
+                            <li><i class="bi bi-check text-primary me-2"></i>Medicaid</li>
+                            <li><i class="bi bi-check text-primary me-2"></i>And more...</li>
+                        </ul>
+                    </div>
+                </div>
+                <p class="small text-muted">Don't see your insurance? Contact us to verify coverage.</p>
+                <h5>Payment Options:</h5>
+                <ul class="list-unstyled">
+                    <li><i class="bi bi-credit-card text-primary me-2"></i>Credit/Debit Cards</li>
+                    <li><i class="bi bi-cash-stack text-primary me-2"></i>HSA/FSA Accepted</li>
+                    <li><i class="bi bi-calendar-check text-primary me-2"></i>Payment Plans Available</li>
+                </ul>
+            </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body p-4">
+                        <h4 class="text-center mb-4">Session Pricing</h4>
+                        <table class="table table-borderless">
+                            <tbody>
+                                <tr>
+                                    <td>Initial Evaluation (60 min)</td>
+                                    <td class="text-end"><strong>$200</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Standard Session (45 min)</td>
+                                    <td class="text-end"><strong>$150</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Extended Session (60 min)</td>
+                                    <td class="text-end"><strong>$175</strong></td>
+                                </tr>
+                                <tr>
+                                    <td>Home Visit (60 min)</td>
+                                    <td class="text-end"><strong>$225</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="small text-muted text-center mb-0">* Prices may vary based on insurance coverage</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container">
+        <h2>Ready to Get Started?</h2>
+        <p>Book your free consultation today and take the first step toward helping your child thrive.</p>
+        <a href="/book" class="btn btn-secondary btn-lg">Schedule Free Consultation</a>
+    </div>
+</section>
+
+@code {
+    private List<Service> services = new();
+
+    protected override void OnInitialized()
+    {
+        services = ContentService.GetServices();
+    }
+}

@@ -1,0 +1,24 @@
+@using PhysicalTherapy.Web.Models
+
+<div class="col-md-6 col-lg-4 mb-4">
+    <div class="testimonial-card h-100">
+        <div class="stars">
+            @for (int i = 0; i < Testimonial.Rating; i++)
+            {
+                <i class="bi bi-star-fill"></i>
+            }
+        </div>
+        <p class="quote">"@Testimonial.Quote"</p>
+        <p class="author mb-0">@Testimonial.Author</p>
+        <p class="author-title">@Testimonial.AuthorTitle</p>
+        @if (!string.IsNullOrEmpty(Testimonial.ServiceUsed))
+        {
+            <span class="badge" style="background: var(--primary); color: white;">@Testimonial.ServiceUsed</span>
+        }
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public Testimonial Testimonial { get; set; } = new();
+}

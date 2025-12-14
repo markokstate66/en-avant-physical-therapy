@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>En Avant Physical Therapy - Helping Children Move Forward</title>
+    <meta name="description" content="En Avant Physical Therapy specializes in helping children overcome developmental challenges, improve motor skills, and build confidence through expert, compassionate care." />
+    <base href="/" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <link href="PhysicalTherapy.Web.styles.css" rel="stylesheet" />
+
+    <!-- Calendly -->
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+
+    <!-- Stripe -->
+    <script src="https://js.stripe.com/v3/" async></script>
+</head>
+
+<body>
+    <div id="app">
+        <div class="loading-container">
+            <svg class="loading-progress">
+                <circle r="40%" cx="50%" cy="50%" />
+                <circle r="40%" cx="50%" cy="50%" />
+            </svg>
+            <div class="loading-progress-text"></div>
+        </div>
+    </div>
+
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">X</a>
+    </div>
+    <script src="_framework/blazor.webassembly.js"></script>
+
+    <script>
+        // Calendly popup helper
+        window.openCalendlyPopup = function(url) {
+            Calendly.initPopupWidget({url: url});
+            return false;
+        };
+
+        // Stripe checkout helper
+        window.redirectToStripeCheckout = async function(sessionId, publishableKey) {
+            const stripe = Stripe(publishableKey);
+            const result = await stripe.redirectToCheckout({ sessionId: sessionId });
+            if (result.error) {
+                console.error(result.error.message);
+            }
+        };
+    </script>
+</body>
+
+</html>

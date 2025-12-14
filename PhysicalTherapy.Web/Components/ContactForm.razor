@@ -1,0 +1,98 @@
+@using PhysicalTherapy.Web.Models
+
+<div class="contact-form">
+    <EditForm Model="@contactMessage" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Your Name *</label>
+                <InputText class="form-control" @bind-Value="contactMessage.Name" placeholder="Enter your name" />
+                <ValidationMessage For="@(() => contactMessage.Name)" />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Email Address *</label>
+                <InputText class="form-control" @bind-Value="contactMessage.Email" placeholder="Enter your email" />
+                <ValidationMessage For="@(() => contactMessage.Email)" />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Phone Number *</label>
+                <InputText class="form-control" @bind-Value="contactMessage.Phone" placeholder="(555) 123-4567" />
+                <ValidationMessage For="@(() => contactMessage.Phone)" />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label class="form-label">Child's Age</label>
+                <InputText class="form-control" @bind-Value="contactMessage.ChildAge" placeholder="e.g., 4 years" />
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Service of Interest *</label>
+            <InputSelect class="form-control" @bind-Value="contactMessage.ServiceInterest">
+                <option value="">Select a service...</option>
+                <option value="Developmental Delays">Developmental Delays</option>
+                <option value="Gross Motor Skills">Gross Motor Skills</option>
+                <option value="Balance & Coordination">Balance & Coordination</option>
+                <option value="Sports Injury Rehab">Sports Injury Rehab</option>
+                <option value="Post-Surgery Recovery">Post-Surgery Recovery</option>
+                <option value="Sensory Integration">Sensory Integration</option>
+                <option value="General Inquiry">General Inquiry</option>
+            </InputSelect>
+            <ValidationMessage For="@(() => contactMessage.ServiceInterest)" />
+        </div>
+
+        <div class="mb-4">
+            <label class="form-label">Your Message *</label>
+            <InputTextArea class="form-control" @bind-Value="contactMessage.Message" rows="5" placeholder="Tell us about your child and how we can help..." />
+            <ValidationMessage For="@(() => contactMessage.Message)" />
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg" disabled="@isSubmitting">
+            @if (isSubmitting)
+            {
+                <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                <span>Sending...</span>
+            }
+            else
+            {
+                <i class="bi bi-send me-2"></i>
+                <span>Send Message</span>
+            }
+        </button>
+
+        @if (showSuccess)
+        {
+            <div class="alert alert-success mt-3" role="alert">
+                <i class="bi bi-check-circle me-2"></i>
+                Thank you for your message! We'll get back to you within 24 hours.
+            </div>
+        }
+    </EditForm>
+</div>
+
+@code {
+    private ContactMessage contactMessage = new();
+    private bool isSubmitting = false;
+    private bool showSuccess = false;
+
+    private async Task HandleValidSubmit()
+    {
+        isSubmitting = true;
+        showSuccess = false;
+
+        // Simulate form submission
+        await Task.Delay(1500);
+
+        // In production, you would send this to your backend/email service
+        Console.WriteLine($"Contact form submitted: {contactMessage.Name}, {contactMessage.Email}");
+
+        isSubmitting = false;
+        showSuccess = true;
+        contactMessage = new ContactMessage();
+
+        StateHasChanged();
+    }
+}

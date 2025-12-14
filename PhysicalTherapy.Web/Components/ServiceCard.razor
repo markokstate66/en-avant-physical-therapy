@@ -1,0 +1,32 @@
+@using PhysicalTherapy.Web.Models
+
+<div class="col-md-6 col-lg-4 mb-4 service-card">
+    <div class="card h-100">
+        <div class="card-body">
+            <div class="card-icon">
+                <i class="bi @Service.Icon"></i>
+            </div>
+            <h3 class="card-title">@Service.Title</h3>
+            <p>@Service.Description</p>
+            @if (ShowPrice)
+            {
+                <p class="mb-3"><strong>$@Service.Price</strong> / @Service.DurationMinutes min session</p>
+            }
+            @if (ShowButton)
+            {
+                <a href="/book" class="btn btn-outline-primary">Book Now</a>
+            }
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public Service Service { get; set; } = new();
+
+    [Parameter]
+    public bool ShowPrice { get; set; } = false;
+
+    [Parameter]
+    public bool ShowButton { get; set; } = true;
+}
